@@ -6,7 +6,7 @@
   <title>Observatorio de Empleo - Design System</title>
   <meta name="description" content="Agentes de IA para Periodismo - Universidad de Chile - Design System interactivo de Empleo en Chile basado en Atomic Design e indicadores oficiales del INE." />
   <meta property="og:title" content="Observatorio de Empleo - Design System" />
-  <meta property="og:description" content="Indicadores del INE en un solo lugar. Documentación viva de átomos, moléculas, organismos, plantillas, páginas, tokens y reglas de accesibilidad." />
+  <meta property="og:description" content="Agentes de IA para Periodismo - Universidad de Chile - Design System interactivo de Empleo en Chile basado en Atomic Design e indicadores oficiales del INE." />
   <meta property="og:type" content="website" />
   <style>
     /* ==========================================================================
@@ -2622,6 +2622,36 @@
               </ul>
             </article>
           </div>
+
+          <div class="table-wrap">
+            <table class="ds-table">
+              <caption>Documentación del componente: Alcance del agente y Límites</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Aspecto</th>
+                  <th scope="col">Definición</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" data-label="Aspecto">Variantes</th>
+                  <td data-label="Definición"><strong>Lo que el agente sí hace</strong> (fondo crema <code>#F7F4D5</code>, borde petróleo 2 px e icono <code>✓</code>) y <strong>Límites: Lo que no puede ni debe hacer</strong> (fondo rosa <code>#D3968C</code>, borde verde oscuro 2 px e iconos <code>!</code> y <code>✕</code>).</td>
+                </tr>
+                <tr>
+                  <th scope="row" data-label="Aspecto">Estados</th>
+                  <td data-label="Definición">Bloque informativo estático de lectura permanente (sin controles interactivos), responsivo: 2 columnas lado a lado desde <code>768 px</code> y apilado en 1 columna en teléfono, con <code>aria-label</code> descriptivo e iconos ocultos al lector (<code>aria-hidden="true"</code>).</td>
+                </tr>
+                <tr>
+                  <th scope="row" data-label="Aspecto">Úsalo para</th>
+                  <td data-label="Definición">Explicar con claridad qué tareas automatizadas ejecuta el agente con aprobación humana y qué límites editoriales y estadísticos respeta frente al INE.</td>
+                </tr>
+                <tr>
+                  <th scope="row" data-label="Aspecto">No lo uses para</th>
+                  <td data-label="Definición">Prometer datos por comuna o ciudad, causas o proyecciones, ocultar el uso de IA ni mostrar avisos de fiabilidad regional (para eso usa el Aviso de fiabilidad).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div class="why-wrap">
@@ -3070,15 +3100,15 @@
                     <span style="font-size:0.75rem; font-weight:700; opacity:0.85;">Bloque principal</span>
                   </div>
                   <div style="display:flex; flex-direction:column; gap:0.25rem; font-size:0.78rem; font-weight:700;">
-                    <div class="card-soft" style="padding:0.3rem 0.5rem;">Panorama laboral &rsaquo;</div>
-                    <div class="card-soft" style="padding:0.3rem 0.5rem;">Por región &rsaquo;</div>
-                    <div class="card-soft" style="padding:0.3rem 0.5rem;">Por género &rsaquo;</div>
-                    <div class="card-soft" style="padding:0.3rem 0.5rem;">Situación laboral &rsaquo;</div>
-                    <div class="card-soft" style="padding:0.3rem 0.5rem;">Series temporales &rsaquo;</div>
-                    <div class="card-soft" style="padding:0.3rem 0.5rem;">Metodología &rsaquo;</div>
+                    <div class="card-soft" tabindex="0" data-info="Enlace de plantilla hacia Panorama laboral (resumen nacional)." style="padding:0.3rem 0.5rem;">Panorama laboral &rsaquo;</div>
+                    <div class="card-soft" tabindex="0" data-info="Enlace de plantilla hacia la exploración por región." style="padding:0.3rem 0.5rem;">Por región &rsaquo;</div>
+                    <div class="card-soft" tabindex="0" data-info="Enlace de plantilla hacia indicadores por género." style="padding:0.3rem 0.5rem;">Por género &rsaquo;</div>
+                    <div class="card-soft" tabindex="0" data-info="Enlace de plantilla hacia situación laboral e informalidad." style="padding:0.3rem 0.5rem;">Situación laboral &rsaquo;</div>
+                    <div class="card-soft" tabindex="0" data-info="Enlace de plantilla hacia series temporales del INE." style="padding:0.3rem 0.5rem;">Series temporales &rsaquo;</div>
+                    <div class="card-soft" tabindex="0" data-info="Enlace de plantilla hacia metodología y fuentes." style="padding:0.3rem 0.5rem;">Metodología &rsaquo;</div>
                   </div>
                   <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:700; padding-top:0.2rem; border-top:1px solid var(--color-borde);">
-                    <span>Fuente</span><span>Ayuda</span>
+                    <span tabindex="0" data-info="Acceso de plantilla a la fuente oficial del INE.">Fuente</span><span tabindex="0" data-info="Acceso de plantilla a los estados y reglas de ayuda.">Ayuda</span>
                   </div>
                 </div>
 
@@ -3115,7 +3145,7 @@
                       <span id="s4-pag-title" style="font-size:0.76rem; font-weight:700; display:block;">Desocupación nacional (jul-sep 2026)</span>
                       <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.25rem;">
                         <strong id="s4-pag-rate" class="num" style="font-size:1.65rem; line-height:1;">9,8 %</strong>
-                        <span id="s4-pag-var" class="var-badge var-up" tabindex="0" data-info="Variación de la tasa de desocupación expresada en puntos porcentuales." style="padding:0.15rem 0.45rem; font-size:0.74rem;">↑ +0,2 pp</span>
+                        <span id="s4-pag-var" class="var-badge var-up" tabindex="0" data-info="Variación de la tasa de desocupación expresada en puntos porcentuales." style="padding:0.15rem 0.45rem; font-size:0.74rem;">↑ +0,2 puntos porcentuales</span>
                       </div>
                       <span id="s4-pag-sub" style="font-size:0.74rem; display:block;">vs. jun-ago 2026: 9,6 %</span>
                     </div>
@@ -3192,7 +3222,7 @@
             <a class="inline-link" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-335.pdf" target="_blank" rel="noopener noreferrer">
               Boletín 335 (se abre en una pestaña nueva)
             </a>
-            <p id="demo-sec-msg" class="small-note" role="status" aria-live="polite" style="margin:0;">Pulsa "Comparar región" o "Ver mi región" para comprobar su acción real.</p>
+            <p id="demo-sec-msg" class="small-note" role="status" aria-live="polite" style="margin:0;">Estos controles son interactivos: pruébalos.</p>
             <div class="mini-map-inline">
               <div class="field-group">
                 <label class="field-label" for="atom-region-select">Selector de región y mapa sincronizados</label>
@@ -3434,6 +3464,9 @@
               <div id="map-selected-callout" class="selected-callout" aria-live="polite">
                 Nacional · 9,8 % · jul-sep 2026 · Boletín 336
               </div>
+              <p id="map-comparable-ref" class="small-note" style="margin:0; text-align:center; font-weight:700;">
+                Nacional jun-ago 2026 · Boletín 335: 9,6 %
+              </p>
             </div>
 
             <div class="stack-3">
@@ -3485,7 +3518,7 @@
 
                 <p id="detail-source-text" class="small-note" style="margin:0;"></p>
                 <div class="row-wrap">
-                  <a id="detail-source-link" class="btn btn-primary btn-sm" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-336.pdf" target="_blank" rel="noopener noreferrer">
+                  <a id="detail-source-link" class="btn btn-primary btn-sm" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/rm/ene-rm-123.pdf" target="_blank" rel="noopener noreferrer">
                     Fuente oficial del INE (se abre en una pestaña nueva)
                   </a>
                   <a class="inline-link" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/cuadros-estadisticos/series-vigentes/indicadores_principales_reg_sex.xlsx" target="_blank" rel="noopener noreferrer">
@@ -3566,6 +3599,70 @@
             </table>
           </div>
         </div>
+
+        <div class="grid-2" style="margin-top: var(--espacio-5);">
+          <article class="card stack-3">
+            <h3>Organismo: Cabecera y navegación</h3>
+            <div class="card-soft stack-2" style="padding:0; overflow:hidden;">
+              <div class="app-header-sim" style="border-radius:0;">
+                <span style="font-weight:800; font-size:0.95rem;">Observatorio de Empleo</span>
+                <span class="chip chip-ine" tabindex="0" data-info="Control Menú: abre o cierra el índice lateral y los modos de vista.">Menú</span>
+              </div>
+              <div style="padding:var(--espacio-3); display:flex; flex-wrap:wrap; gap:0.4rem;">
+                <span class="chip chip-nacional" tabindex="0" data-info="Modo Ver todo o Ver una sección dentro del índice lateral.">1–10 Secciones</span>
+                <span class="chip chip-hombres" tabindex="0" data-info="Herramientas del menú: tema día/noche y actualización en vivo.">Tema y GET /regiones</span>
+              </div>
+            </div>
+            <p class="small-note" style="margin:0;"><strong>Variante:</strong> Cabecera fija compacta (56 px) con panel lateral plegable; en la vista previa de Páginas adapta su título entre <em>Empleo en Chile</em> y <em>Observatorio de Empleo</em>.</p>
+            <p class="small-note" style="margin:0;"><strong>Estados:</strong> Menú cerrado (por defecto), abierto con fondo atenuado (<code>Escape</code> cierra), sección activa (<code>aria-current="location"</code>) y conmutador Ver todo / Ver una sección.</p>
+            <div class="table-wrap">
+              <table class="ds-table">
+                <caption>Uso de Cabecera y navegación</caption>
+                <thead>
+                  <tr><th scope="col">Úsalo para</th><th scope="col">No lo uses para</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Úsalo para">Identificar el observatorio y navegar entre las 10 secciones.</td>
+                    <td data-label="No lo uses para">Agregar menús de varios niveles o enlaces promocionales.</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Úsalo para">Alojar el cambio de tema y la consulta al endpoint oficial.</td>
+                    <td data-label="No lo uses para">Ocultar la barra superior o duplicar el botón principal.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card stack-3">
+            <h3>Organismo: Pie con la declaración de IA</h3>
+            <div class="doc-footer stack-2" style="margin-top:0; padding:var(--espacio-3) var(--espacio-4); border-radius:var(--radio-md);">
+              <p style="font-weight:800; font-size:0.95rem; margin:0;">Observatorio de Empleo - Design System</p>
+              <p class="small-note" style="margin:0;">Datos: INE, Boletines ENE N.º 335 y 336. Revisión humana y declaración explícita de uso de IA.</p>
+            </div>
+            <p class="small-note" style="margin:0;"><strong>Variante:</strong> Pie de página completo (<code>.doc-footer</code>) y pie compacto de la vista previa en Páginas con enlace al boletín activo.</p>
+            <p class="small-note" style="margin:0;"><strong>Estados:</strong> Vista nacional (Boletines 335 y 336), región activa (actualiza el enlace al PDF de la región elegida) y foco visible de 3 px.</p>
+            <div class="table-wrap">
+              <table class="ds-table">
+                <caption>Uso del Pie con la declaración de IA</caption>
+                <thead>
+                  <tr><th scope="col">Úsalo para</th><th scope="col">No lo uses para</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Úsalo para">Acreditar fuente INE, revisión humana y uso de IA.</td>
+                    <td data-label="No lo uses para">Ocultar herramientas de IA o atribuir autoría automática.</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Úsalo para">Enlazar al PDF oficial del boletín vigente en pestaña nueva.</td>
+                    <td data-label="No lo uses para">Incluir avisos de fiabilidad regional o formularios largos.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
       </section>
 
       <!-- =====================================================================
@@ -3611,12 +3708,12 @@
                   <div class="preview-nav stack-2" aria-label="Navegación de plantilla">
                     <span style="font-weight:800; padding:0.25rem 0.4rem;">Navegación</span>
                     <ul class="tpl-nav-list">
-                      <li class="tpl-nav-item"><span>Panorama laboral</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
-                      <li class="tpl-nav-item"><span>Por región</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
-                      <li class="tpl-nav-item"><span>Por género</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
-                      <li class="tpl-nav-item"><span>Situación laboral</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
-                      <li class="tpl-nav-item"><span>Series temporales</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
-                      <li class="tpl-nav-item"><span>Metodología</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
+                      <li class="tpl-nav-item" tabindex="0" data-info="Ítem de plantilla para el panorama laboral nacional."><span>Panorama laboral</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
+                      <li class="tpl-nav-item" tabindex="0" data-info="Ítem de plantilla para la vista y tabla por región."><span>Por región</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
+                      <li class="tpl-nav-item" tabindex="0" data-info="Ítem de plantilla para las tasas por sexo."><span>Por género</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
+                      <li class="tpl-nav-item" tabindex="0" data-info="Ítem de plantilla para ocupación, participación e informalidad."><span>Situación laboral</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
+                      <li class="tpl-nav-item" tabindex="0" data-info="Ítem de plantilla para series históricas del INE."><span>Series temporales</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
+                      <li class="tpl-nav-item" tabindex="0" data-info="Ítem de plantilla para metodología y fuentes oficiales."><span>Metodología</span><span class="skel-bar" style="width:2.5rem; flex-shrink:0;"></span></li>
                     </ul>
                   </div>
 
@@ -3921,6 +4018,7 @@
               <li><strong>Objetivos táctiles ≥ 44 px:</strong> todos los botones, enlaces de navegación y selectores cumplen 44 px mínimos.</li>
               <li><strong>Sin dependencia del color:</strong> la selección en el mapa usa borde de 3 px y etiqueta; las variaciones usan flechas y texto; Aysén y Magallanes añaden patrón rayado y asterisco.</li>
               <li><strong>Preferencia de movimiento:</strong> <code>prefers-reduced-motion</code> desactiva animaciones y transiciones suaves.</li>
+              <li><strong>Textos alternativos:</strong> todo gráfico (mapa, iconos, miniaturas) lleva texto alternativo o <code>aria-label</code>; ejemplo real del mapa: <code>"Valparaíso, desocupación 10,2 %, jun-ago 2026"</code>.</li>
             </ul>
           </article>
 
@@ -4147,6 +4245,9 @@
 
         const pageLbl = document.getElementById('page-region-label');
         if (pageLbl) pageLbl.textContent = 'Región seleccionada (' + shortPer + ')';
+
+        const mapCompRef = document.getElementById('map-comparable-ref');
+        if (mapCompRef) mapCompRef.textContent = 'Nacional ' + fullLabel + ': ' + natTasa;
       }
 
       function getReliability(codigo) {
@@ -4726,7 +4827,7 @@
           const pagVar = document.getElementById('s4-pag-var');
           if (pagVar) {
             pagVar.className = getVarBadgeClass(nat.variacion_mensual_pp);
-            pagVar.textContent = getVarArrow(nat.variacion_mensual_pp) + formatShortPP(nat.variacion_mensual_pp);
+            pagVar.textContent = getVarArrow(nat.variacion_mensual_pp) + formatPP(nat.variacion_mensual_pp);
           }
           setText('s4-pag-sub', 'vs. ' + nat.prev_period + ': ' + formatPct(nat.prev_tasa));
           setText('s4-pag-part', formatPct(nat.participacion));
@@ -4820,7 +4921,7 @@
         const pagVar = document.getElementById('s4-pag-var');
         if (pagVar) {
           pagVar.className = getVarBadgeClass(reg.variacion_pp);
-          pagVar.textContent = getVarArrow(reg.variacion_pp) + formatShortPP(reg.variacion_pp);
+          pagVar.textContent = getVarArrow(reg.variacion_pp) + formatPP(reg.variacion_pp);
         }
         setText('s4-pag-sub', perLabel + (rel ? ' · dato ' + rel : ''));
         setText('s4-pag-part', 'no consta a nivel regional');
@@ -5501,7 +5602,8 @@
         const demoMsg = document.getElementById('demo-sec-msg');
         if (demoSec && demoMsg) {
           demoSec.addEventListener('click', function () {
-            demoMsg.textContent = 'Botón secundario activado: desplazando al comparador regional.';
+            if (viewMode === 'single') applySectionVisibility('sec-7', false);
+            demoMsg.textContent = 'Desplazando al comparador regional.';
             const comp = document.getElementById('comp-region-a');
             if (comp) {
               comp.scrollIntoView({ behavior: 'smooth', block: 'center' });
