@@ -1678,6 +1678,20 @@
       stroke: var(--prim-verde-oscuro);
       stroke-width: 3;
     }
+    :root[data-theme="dark"] .chile-svg path.region:hover,
+    :root[data-theme="dark"] .chile-svg path.region.is-selected {
+      stroke: var(--prim-crema);
+    }
+    :root[data-theme="dark"] .chile-svg path.region.is-selected {
+      stroke-width: 3.5;
+    }
+    .chile-svg.is-placeholder-map path.region {
+      fill: var(--prim-gris-esqueleto);
+      stroke: var(--color-superficie);
+      stroke-width: 1.5;
+      cursor: default;
+      pointer-events: none;
+    }
     .chile-svg .reg-label {
       font-family: var(--fuente-base);
       font-size: 10px;
@@ -1685,6 +1699,69 @@
       pointer-events: none;
       text-anchor: middle;
       dominant-baseline: central;
+    }
+    .chile-svg .reg-slot-badge {
+      font-family: var(--fuente-base);
+      font-size: 13px;
+      font-weight: 900;
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .mini-map-inline {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(3.5rem, 5rem);
+      gap: var(--espacio-3);
+      align-items: center;
+    }
+    .comp-map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--espacio-4);
+      align-items: start;
+    }
+    @media (min-width: 720px) {
+      .comp-map-layout {
+        grid-template-columns: minmax(150px, 195px) minmax(0, 1fr);
+      }
+    }
+
+    .ui-info-popover,
+    .map-floating-tooltip {
+      position: fixed;
+      z-index: 300;
+      max-width: min(320px, calc(100vw - 16px));
+      background-color: var(--prim-verde-oscuro);
+      color: var(--prim-crema);
+      border: 2px solid var(--prim-crema);
+      border-radius: var(--radio-md);
+      padding: 0.55rem 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1.35;
+      box-shadow: var(--sombra-suave);
+    }
+    .map-floating-tooltip {
+      pointer-events: none;
+    }
+    .ui-info-popover[hidden],
+    .map-floating-tooltip[hidden] {
+      display: none;
+    }
+    :root[data-theme="dark"] .ui-info-popover,
+    :root[data-theme="dark"] .map-floating-tooltip {
+      background-color: var(--prim-crema);
+      color: var(--prim-verde-oscuro);
+      border-color: var(--prim-petroleo);
+    }
+    [data-info] {
+      cursor: help;
+    }
+    button[data-info],
+    a[data-info],
+    select[data-info] {
+      cursor: pointer;
     }
 
     .map-tooltip {
@@ -1768,6 +1845,17 @@
       justify-content: center;
       font-weight: 800;
       flex-shrink: 0;
+    }
+    :root[data-theme="dark"] #sec-7 .reliability-box,
+    :root[data-theme="dark"] #sec-7 .why-panel,
+    :root[data-theme="dark"] #sec-7 .chip-alerta {
+      background-color: #4A1D24 !important;
+      color: #F7F4D5 !important;
+      border: 2px solid #D3968C !important;
+    }
+    :root[data-theme="dark"] #sec-7 .reliability-box .reliability-icon {
+      border: 2px solid #D3968C;
+      color: #D3968C;
     }
 
     /* ==========================================================================
@@ -2434,38 +2522,6 @@
             </div>
           </div>
         </article>
-
-        <div class="agent-limits-grid">
-          <article class="agent-block agent-block-yes" aria-label="Lo que el agente sí hace">
-            <div class="agent-block-head">
-              <span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span>
-              <h3>Lo que el agente sí hace</h3>
-            </div>
-            <ul class="agent-list">
-              <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Vigila al INE cada mañana.</span></li>
-              <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Lee el boletín y extrae las cifras con su fuente.</span></li>
-              <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Redacta el borrador de la nota del trimestre en lenguaje simple.</span></li>
-              <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Deja una traza de todo lo que hizo.</span></li>
-              <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Una persona revisa y aprueba antes de publicar.</span></li>
-            </ul>
-          </article>
-
-          <article class="agent-block agent-block-no" aria-label="Límites: lo que no puede ni debe hacer">
-            <div class="agent-block-head">
-              <span class="reliability-icon" aria-hidden="true">!</span>
-              <h3>Límites: Lo que no puede ni debe hacer</h3>
-            </div>
-            <ul class="agent-list">
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Publicar sin que una persona apruebe.</span></li>
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Inventar una cifra o una causa.</span></li>
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Adjetivar ("alarmante", "histórico").</span></li>
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Dar datos por comuna o ciudad (la ENE no lo permite).</span></li>
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Hacer proyecciones o decir dónde conviene estudiar o trabajar.</span></li>
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Hacer rankings con datos poco fiables (Aysén y Magallanes).</span></li>
-              <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Esconder que se usó IA.</span></li>
-            </ul>
-          </article>
-        </div>
       </section>
 
       <!-- =====================================================================
@@ -2532,6 +2588,40 @@
             <p>Navegación intuitiva para explorar según los intereses de cada persona.</p>
             <p class="small-note"><strong>Para Amaya:</strong> elige libremente qué regiones mirar según dónde piensa estudiar, sin sugerencias ni juicios automatizados.</p>
           </article>
+        </div>
+
+        <div class="stack-4" style="margin-top: var(--espacio-5);">
+          <div class="agent-limits-grid">
+            <article class="agent-block agent-block-yes" aria-label="Lo que el agente sí hace">
+              <div class="agent-block-head">
+                <span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span>
+                <h3>Lo que el agente sí hace</h3>
+              </div>
+              <ul class="agent-list">
+                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Vigila al INE cada mañana.</span></li>
+                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Lee el boletín y extrae las cifras con su fuente.</span></li>
+                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Redacta el borrador de la nota del trimestre en lenguaje simple.</span></li>
+                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Deja una traza de todo lo que hizo.</span></li>
+                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Una persona revisa y aprueba antes de publicar.</span></li>
+              </ul>
+            </article>
+
+            <article class="agent-block agent-block-no" aria-label="Límites: lo que no puede ni debe hacer">
+              <div class="agent-block-head">
+                <span class="reliability-icon" aria-hidden="true">!</span>
+                <h3>Límites: Lo que no puede ni debe hacer</h3>
+              </div>
+              <ul class="agent-list">
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Publicar sin que una persona apruebe.</span></li>
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Inventar una cifra o una causa.</span></li>
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Adjetivar ("alarmante", "histórico").</span></li>
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Dar datos por comuna o ciudad (la ENE no lo permite).</span></li>
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Hacer proyecciones o decir dónde conviene estudiar o trabajar.</span></li>
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Hacer rankings con datos poco fiables (Aysén y Magallanes).</span></li>
+                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Esconder que se usó IA.</span></li>
+              </ul>
+            </article>
+          </div>
         </div>
 
         <div class="why-wrap">
@@ -2644,7 +2734,7 @@
                 </button>
                 <button type="button" class="token-btn js-copy-token" data-copy="#B5D1D6">
                   <span class="token-swatch" style="background:#B5D1D6;"></span>
-                  <span class="token-meta"><span class="token-name">--mapa-tramo-2 (7,5 % – 9,4 %)</span><span class="token-val">#B5D1D6 · texto #0A3323 (8,1:1)</span></span>
+                  <span class="token-meta"><span class="token-name">--mapa-tramo-2 (7,5 % – 9,4 %)</span><span class="token-val">#B5D1D6 · texto #0A3323 (8,6:1)</span></span>
                   <span class="token-copy-state">Copiar</span>
                 </button>
                 <button type="button" class="token-btn js-copy-token" data-copy="#2B6E7D">
@@ -2716,6 +2806,7 @@
                 <tr><td data-label="Texto">Blanco (#FFFFFF)</td><td data-label="Fondo">Petróleo (#105666)</td><td data-label="Razón" class="num">8,3:1</td><td data-label="Estado"><span class="badge-pass">✓ Cumple</span></td><td data-label="Uso permitido">Botón principal</td></tr>
                 <tr><td data-label="Texto">Crema (#F7F4D5)</td><td data-label="Fondo">Verde oscuro (#0A3323)</td><td data-label="Razón" class="num">12,5:1</td><td data-label="Estado"><span class="badge-pass">✓ Cumple</span></td><td data-label="Uso permitido">Cabecera y banda de cierre</td></tr>
                 <tr><td data-label="Texto">Verde oscuro (#0A3323)</td><td data-label="Fondo">Rosa (#D3968C)</td><td data-label="Razón" class="num">5,6:1</td><td data-label="Estado"><span class="badge-pass">✓ Cumple</span></td><td data-label="Uso permitido">Región seleccionada (con borde grueso) y alerta o límite (con icono "!" y texto); nunca solo por color</td></tr>
+                <tr><td data-label="Texto">Verde oscuro (#0A3323)</td><td data-label="Fondo">Petróleo claro (#B5D1D6)</td><td data-label="Razón" class="num">8,6:1</td><td data-label="Estado"><span class="badge-pass">✓ Cumple</span></td><td data-label="Uso permitido">Etiquetas del mapa (tramo 2: 7,5 % – 9,4 %)</td></tr>
                 <tr><td data-label="Texto">Verde oscuro (#0A3323)</td><td data-label="Fondo">Salvia (#839958)</td><td data-label="Razón" class="num">4,4:1</td><td data-label="Estado"><span class="badge-fail">✕ Solo texto grande</span></td><td data-label="Uso permitido">NO en texto normal; solo ≥ 24 px o ≥ 18,66 px en negrita</td></tr>
                 <tr><td data-label="Texto">Salvia (#839958)</td><td data-label="Fondo">Crema (#F7F4D5)</td><td data-label="Razón" class="num">2,8:1</td><td data-label="Estado"><span class="badge-fail">✕ No cumple</span></td><td data-label="Uso permitido">Prohibido salvia como color de texto</td></tr>
                 <tr><td data-label="Texto">Blanco (#FFFFFF)</td><td data-label="Fondo">Salvia (#839958)</td><td data-label="Razón" class="num">3,2:1</td><td data-label="Estado"><span class="badge-fail">✕ No cumple</span></td><td data-label="Uso permitido">Prohibido texto blanco sobre salvia</td></tr>
@@ -2784,17 +2875,17 @@
                 <div style="border-top:1px solid var(--color-borde); padding-top:0.5rem;">
                   <p style="font-weight:800; font-size:0.9rem; margin-bottom:0.35rem;">Íconos (ejemplos)</p>
                   <div class="icon-tile-row">
-                    <span class="icon-tile" style="background:var(--prim-salvia-suave);" title="Personas">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M17 14c2.4 0 4 1.4 4 4"/></svg>
+                    <span class="icon-tile" tabindex="0" data-info="Ícono Personas: representa población y mercado laboral." style="background:var(--prim-salvia-suave);" title="Personas">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.5-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.2"/><path d="M17 14c2.4 0 4 1.4 4 4"/></svg>
                     </span>
-                    <span class="icon-tile" style="background:var(--prim-salvia-suave);" title="Maletín">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    <span class="icon-tile" tabindex="0" data-info="Ícono Maletín: representa ocupación y empleo." style="background:var(--prim-salvia-suave);" title="Maletín">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                     </span>
-                    <span class="icon-tile" style="background:var(--prim-crema); border:1px solid var(--color-borde);" title="Barras">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="10"/></svg>
+                    <span class="icon-tile" tabindex="0" data-info="Ícono Barras: representa comparación de indicadores." style="background:var(--prim-crema); border:1px solid var(--color-borde);" title="Barras">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="10"/></svg>
                     </span>
-                    <span class="icon-tile" style="background:var(--prim-rosa-suave);" title="Ubicación">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-6-5.33-6-11a6 6 0 1 1 12 0c0 5.67-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg>
+                    <span class="icon-tile" tabindex="0" data-info="Ícono Ubicación: representa selección por región." style="background:var(--prim-rosa-suave);" title="Ubicación">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-6-5.33-6-11a6 6 0 1 1 12 0c0 5.67-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg>
                     </span>
                   </div>
                 </div>
@@ -2810,19 +2901,19 @@
                 <div style="border-top:1px solid var(--color-borde); padding-top:0.5rem;">
                   <p style="font-weight:800; font-size:0.9rem; margin-bottom:0.35rem;">Etiquetas (chips)</p>
                   <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
-                    <span class="chip chip-nacional">Nacional</span>
-                    <span class="chip chip-mujeres">♀ Mujeres</span>
-                    <span class="chip chip-hombres">♂ Hombres</span>
-                    <span class="chip chip-ine">INE</span>
+                    <span class="chip chip-nacional" tabindex="0" data-info="Etiqueta Nacional: identifica cifras del total país.">Nacional</span>
+                    <span class="chip chip-mujeres" tabindex="0" data-info="Etiqueta Mujeres: identifica la tasa de desocupación femenina.">♀ Mujeres</span>
+                    <span class="chip chip-hombres" tabindex="0" data-info="Etiqueta Hombres: identifica la tasa de desocupación masculina.">♂ Hombres</span>
+                    <span class="chip chip-ine" tabindex="0" data-info="Etiqueta INE: acredita fuente oficial y boletín del período.">INE</span>
                   </div>
                 </div>
 
                 <div style="border-top:1px solid var(--color-borde); padding-top:0.5rem;">
                   <p style="font-weight:800; font-size:0.9rem; margin-bottom:0.35rem;">Indicador de variación</p>
                   <div style="display:flex; flex-wrap:wrap; gap:0.35rem; font-size:0.82rem; font-weight:700;">
-                    <span class="var-badge var-down" style="padding:0.2rem 0.5rem; font-size:0.78rem;">↓ Disminuye</span>
-                    <span class="var-badge var-flat" style="padding:0.2rem 0.5rem; font-size:0.78rem;">= Sin cambio</span>
-                    <span class="var-badge var-up" style="padding:0.2rem 0.5rem; font-size:0.78rem;">↑ Aumenta</span>
+                    <span class="var-badge var-down" tabindex="0" data-info="Indicador de baja: muestra disminución en puntos porcentuales con flecha y texto." style="padding:0.2rem 0.5rem; font-size:0.78rem;">↓ Disminuye</span>
+                    <span class="var-badge var-flat" tabindex="0" data-info="Indicador estable: muestra ausencia de cambio en puntos porcentuales." style="padding:0.2rem 0.5rem; font-size:0.78rem;">= Sin cambio</span>
+                    <span class="var-badge var-up" tabindex="0" data-info="Indicador de alza: muestra aumento en puntos porcentuales con flecha y texto." style="padding:0.2rem 0.5rem; font-size:0.78rem;">↑ Aumenta</span>
                   </div>
                 </div>
 
@@ -2855,7 +2946,7 @@
                     </span>
                   </div>
                   <p id="s4-mol-cifra-rate" class="num" style="font-size:2.1rem; font-weight:800; line-height:1.05; margin:0;">9,8 %</p>
-                  <span id="s4-mol-cifra-var" class="var-badge var-up" style="font-size:0.8rem;">↑ +0,2 puntos porcentuales</span>
+                  <span id="s4-mol-cifra-var" class="var-badge var-up" tabindex="0" data-info="Variación de la tasa de desocupación expresada en puntos porcentuales." style="font-size:0.8rem;">↑ +0,2 puntos porcentuales</span>
                   <p id="s4-mol-cifra-note" class="small-note" style="margin:0;">vs. trimestre anterior (jun-ago 2026: 9,6 %).</p>
                 </div>
 
@@ -3024,13 +3115,13 @@
                       <span id="s4-pag-title" style="font-size:0.76rem; font-weight:700; display:block;">Desocupación nacional (jul-sep 2026)</span>
                       <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.25rem;">
                         <strong id="s4-pag-rate" class="num" style="font-size:1.65rem; line-height:1;">9,8 %</strong>
-                        <span id="s4-pag-var" class="var-badge var-up" style="padding:0.15rem 0.45rem; font-size:0.74rem;">↑ +0,2 pp</span>
+                        <span id="s4-pag-var" class="var-badge var-up" tabindex="0" data-info="Variación de la tasa de desocupación expresada en puntos porcentuales." style="padding:0.15rem 0.45rem; font-size:0.74rem;">↑ +0,2 pp</span>
                       </div>
                       <span id="s4-pag-sub" style="font-size:0.74rem; display:block;">vs. jun-ago 2026: 9,6 %</span>
                     </div>
 
                     <div style="display:flex; flex-direction:column; gap:0.35rem; align-items:stretch;">
-                      <svg class="chile-svg js-chile-mini" viewBox="0 0 180 776" aria-label="Miniatura mapa de Chile" xmlns="http://www.w3.org/2000/svg" style="max-width:3.25rem; margin:0 auto;"></svg>
+                      <svg id="mapa-chile-s4-pag" class="chile-svg js-chile-map" data-map-compact="1" viewBox="0 0 180 776" role="group" aria-label="Mini mapa interactivo de Chile en Páginas" xmlns="http://www.w3.org/2000/svg" style="max-width:3.5rem; margin:0 auto;"></svg>
                       <div style="display:flex; flex-direction:column; gap:0.25rem; font-size:0.75rem; min-width:0;">
                         <div style="background:var(--prim-salvia-suave); color:var(--prim-verde-oscuro); padding:0.2rem 0.45rem; border-radius:9999px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.25rem;"><span>Participación</span><strong id="s4-pag-part" class="num">61,6 %</strong></div>
                         <div style="background:var(--prim-salvia-suave); color:var(--prim-verde-oscuro); padding:0.2rem 0.45rem; border-radius:9999px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.25rem;"><span>Ocupación</span><strong id="s4-pag-occ" class="num">55,5 %</strong></div>
@@ -3040,7 +3131,7 @@
 
                     <button type="button" class="btn btn-primary btn-sm js-go-region" style="font-size:0.78rem; padding:0.35rem 0.6rem;">Ver por región →</button>
                     <p style="font-size:0.74rem; margin:0; text-align:center; border-top:1px solid var(--color-borde); padding-top:0.3rem;">
-                      <a id="s4-pag-source-link" class="inline-link" style="min-height:auto; font-size:0.74rem;" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-335.pdf" target="_blank" rel="noopener noreferrer">INE · Boletín 336 · jul-sep 2026</a>
+                      <a id="s4-pag-source-link" class="inline-link" style="min-height:auto; font-size:0.74rem;" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-336.pdf" target="_blank" rel="noopener noreferrer">INE · Boletín 336 · jul-sep 2026</a>
                     </p>
                   </div>
                 </div>
@@ -3102,25 +3193,28 @@
               Boletín 335 (se abre en una pestaña nueva)
             </a>
             <p id="demo-sec-msg" class="small-note" role="status" aria-live="polite" style="margin:0;">Pulsa "Comparar región" o "Ver mi región" para comprobar su acción real.</p>
-            <div class="field-group">
-              <label class="field-label" for="atom-region-select">Selector de región (sincronizado)</label>
-              <select id="atom-region-select" class="select-control js-region-select"></select>
+            <div class="mini-map-inline">
+              <div class="field-group">
+                <label class="field-label" for="atom-region-select">Selector de región y mapa sincronizados</label>
+                <select id="atom-region-select" class="select-control js-region-select"></select>
+              </div>
+              <svg id="mapa-chile-atomos" class="chile-svg js-chile-map" data-map-compact="1" viewBox="0 0 180 776" role="group" aria-label="Mapa interactivo de Chile en Átomos" xmlns="http://www.w3.org/2000/svg" style="max-width:4.5rem; margin:0 auto;"></svg>
             </div>
           </article>
 
           <article class="card stack-3">
             <h3>Etiquetas (chips) e íconos de trazo único</h3>
             <div class="row-wrap" style="flex-direction:row;">
-              <span class="chip chip-nacional">Nacional</span>
-              <span class="chip chip-mujeres">♀ Mujeres</span>
-              <span class="chip chip-hombres">♂ Hombres</span>
-              <span class="chip chip-ine">INE</span>
+              <span class="chip chip-nacional" tabindex="0" data-info="Etiqueta Nacional: identifica cifras del total país.">Nacional</span>
+              <span class="chip chip-mujeres" tabindex="0" data-info="Etiqueta Mujeres: identifica la tasa de desocupación femenina.">♀ Mujeres</span>
+              <span class="chip chip-hombres" tabindex="0" data-info="Etiqueta Hombres: identifica la tasa de desocupación masculina.">♂ Hombres</span>
+              <span class="chip chip-ine" tabindex="0" data-info="Etiqueta INE: acredita fuente oficial y boletín del período.">INE</span>
             </div>
             <div class="icon-tile-row" style="max-width: 260px;">
-              <span class="icon-tile" style="background:var(--prim-salvia-suave);" title="Personas"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.5-5 6-5s6 2 6 5"/></svg></span>
-              <span class="icon-tile" style="background:var(--prim-salvia-suave);" title="Maletín"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
-              <span class="icon-tile" style="background:var(--prim-crema); border:1px solid var(--color-borde);" title="Barras"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="10"/></svg></span>
-              <span class="icon-tile" style="background:var(--prim-rosa-suave);" title="Ubicación"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-6-5.33-6-11a6 6 0 1 1 12 0c0 5.67-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span>
+              <span class="icon-tile" tabindex="0" data-info="Ícono Personas: representa población y mercado laboral." style="background:var(--prim-salvia-suave);" title="Personas"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3 2.5-5 6-5s6 2 6 5"/></svg></span>
+              <span class="icon-tile" tabindex="0" data-info="Ícono Maletín: representa ocupación y empleo." style="background:var(--prim-salvia-suave);" title="Maletín"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+              <span class="icon-tile" tabindex="0" data-info="Ícono Barras: representa comparación de indicadores." style="background:var(--prim-crema); border:1px solid var(--color-borde);" title="Barras"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="10"/></svg></span>
+              <span class="icon-tile" tabindex="0" data-info="Ícono Ubicación: representa selección por región." style="background:var(--prim-rosa-suave);" title="Ubicación"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-6-5.33-6-11a6 6 0 1 1 12 0c0 5.67-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></svg></span>
             </div>
             <p class="small-note">Todos los íconos se dibujan con SVG en línea de trazo único de 2 px, sin archivos externos.</p>
           </article>
@@ -3128,9 +3222,9 @@
           <article class="card stack-3">
             <h3>Indicador de variación (icono + texto, nunca solo color)</h3>
             <div class="stack-2">
-              <span class="var-badge var-up">↑ Aumenta (+0,2 puntos porcentuales)</span>
-              <span class="var-badge var-down">↓ Disminuye (-0,3 puntos porcentuales)</span>
-              <span class="var-badge var-flat">= Sin cambio (0,0 puntos porcentuales)</span>
+              <span class="var-badge var-up" tabindex="0" data-info="Alza: la tasa subió respecto al período comparado, medida en puntos porcentuales.">↑ Aumenta (+0,2 puntos porcentuales)</span>
+              <span class="var-badge var-down" tabindex="0" data-info="Baja: la tasa disminuyó respecto al período comparado, medida en puntos porcentuales.">↓ Disminuye (-0,3 puntos porcentuales)</span>
+              <span class="var-badge var-flat" tabindex="0" data-info="Sin cambio: la tasa se mantuvo igual respecto al período comparado.">= Sin cambio (0,0 puntos porcentuales)</span>
             </div>
             <div class="why-wrap">
               <button type="button" class="why-btn" aria-expanded="false" aria-controls="why-atom-var">¿Por qué?</button>
@@ -3176,14 +3270,14 @@
           <article class="card stack-3" aria-live="polite">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:0.5rem;">
               <div>
-                <span id="mol-period-chip" class="chip chip-ine" style="margin-bottom:0.4rem;">jun-ago 2026 · Boletín 335</span>
+                <span id="mol-period-chip" class="chip chip-ine" tabindex="0" data-info="Período y boletín oficial del INE al que corresponde esta cifra." style="margin-bottom:0.4rem;">jun-ago 2026 · Boletín 335</span>
                 <h3 id="mol-region-name" style="margin:0;">Metropolitana</h3>
               </div>
-              <span class="chip chip-nacional" id="mol-region-code">RM</span>
+              <span class="chip chip-nacional" id="mol-region-code" tabindex="0" data-info="Código territorial de la vista activa (NAC o sigla regional).">RM</span>
             </div>
             <p id="mol-region-rate" class="num" style="font-size:var(--texto-cifra); font-weight:800; line-height:1; margin:0;">9,8 %</p>
             <div id="mol-region-var-wrap">
-              <span class="var-badge var-up" id="mol-region-var">↑ +0,9 puntos porcentuales (variación anual)</span>
+              <span class="var-badge var-up" id="mol-region-var" tabindex="0" data-info="Cambio de la tasa medido en puntos porcentuales (nunca en porcentaje).">↑ +0,9 puntos porcentuales (variación anual)</span>
             </div>
             <p id="mol-region-source" class="small-note" style="margin:0;">INE, Boletín estadístico: empleo trimestral, región Metropolitana de Santiago, edición n° 123, 30 de septiembre de 2026</p>
             <a id="mol-region-url" class="inline-link" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/rm/ene-rm-123.pdf" target="_blank" rel="noopener noreferrer">
@@ -3241,13 +3335,16 @@
             </div>
 
             <div class="stack-2">
-              <h3>Leyenda del mapa regional (jun-ago 2026)</h3>
-              <div style="display:flex; flex-wrap:wrap; gap:0.45rem; font-size:0.85rem; font-weight:700;">
-                <span style="background:#EFEBD0; color:#0A3323; padding:0.25rem 0.6rem; border-radius:8px; border:1px solid rgba(10,51,35,0.2);">&lt; 7,5 %</span>
-                <span style="background:#B5D1D6; color:#0A3323; padding:0.25rem 0.6rem; border-radius:8px;">7,5 % – 9,4 %</span>
-                <span style="background:#2B6E7D; color:#F7F4D5; padding:0.25rem 0.6rem; border-radius:8px;">9,5 % – 10,4 %</span>
-                <span style="background:#105666; color:#F7F4D5; padding:0.25rem 0.6rem; border-radius:8px;">≥ 10,5 %</span>
-                <span style="background:#D3968C; color:#0A3323; padding:0.25rem 0.6rem; border-radius:8px; border:2px solid #0A3323;">Seleccionada</span>
+              <h3>Mapa y leyenda regional (jun-ago 2026)</h3>
+              <div class="mini-map-inline">
+                <div style="display:flex; flex-wrap:wrap; gap:0.45rem; font-size:0.85rem; font-weight:700;">
+                  <span tabindex="0" data-info="Tramo 1 del mapa secuencial: regiones bajo 7,5 %." style="background:#EFEBD0; color:#0A3323; padding:0.25rem 0.6rem; border-radius:8px; border:1px solid rgba(10,51,35,0.2);">&lt; 7,5 %</span>
+                  <span tabindex="0" data-info="Tramo 2 del mapa secuencial: regiones entre 7,5 % y 9,4 %." style="background:#B5D1D6; color:#0A3323; padding:0.25rem 0.6rem; border-radius:8px;">7,5 % – 9,4 %</span>
+                  <span tabindex="0" data-info="Tramo 3 del mapa secuencial: regiones entre 9,5 % y 10,4 %." style="background:#2B6E7D; color:#F7F4D5; padding:0.25rem 0.6rem; border-radius:8px;">9,5 % – 10,4 %</span>
+                  <span tabindex="0" data-info="Tramo 4 del mapa secuencial: regiones de 10,5 % o más." style="background:#105666; color:#F7F4D5; padding:0.25rem 0.6rem; border-radius:8px;">≥ 10,5 %</span>
+                  <span tabindex="0" data-info="Región seleccionada: fondo rosa con borde grueso en cualquier mapa." style="background:#D3968C; color:#0A3323; padding:0.25rem 0.6rem; border-radius:8px; border:2px solid #0A3323;">Seleccionada</span>
+                </div>
+                <svg id="mapa-chile-moleculas" class="chile-svg js-chile-map" data-map-compact="1" viewBox="0 0 180 776" role="group" aria-label="Mapa interactivo de Chile en Moléculas" xmlns="http://www.w3.org/2000/svg" style="max-width:4.5rem; margin:0 auto;"></svg>
               </div>
             </div>
           </article>
@@ -3335,7 +3432,7 @@
               <div id="map-tooltip" class="map-tooltip" hidden role="status"></div>
               <p class="small-note" style="margin:0; text-align:center;">Mapa esquemático, no a escala</p>
               <div id="map-selected-callout" class="selected-callout" aria-live="polite">
-                Nacional · 9,8 %
+                Nacional · 9,8 % · jul-sep 2026 · Boletín 336
               </div>
             </div>
 
@@ -3356,12 +3453,13 @@
               </div>
 
               <article class="card-soft stack-3" id="region-detail-card" aria-live="polite">
-                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; align-items:center;">
-                  <div>
-                    <span id="detail-period-chip" class="chip chip-ine">jun-ago 2026 · Boletín 335</span>
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.75rem; align-items:center;">
+                  <div style="min-width:0; flex:1;">
+                    <span id="detail-period-chip" class="chip chip-ine" tabindex="0" data-info="Trimestre móvil y boletín del INE de la ficha seleccionada.">jun-ago 2026 · Boletín 335</span>
                     <h3 id="detail-title" style="margin:0.35rem 0 0;">Metropolitana (RM)</h3>
+                    <strong id="detail-rate" class="num" style="font-size:2.1rem; display:block; margin-top:0.25rem;">9,8 %</strong>
                   </div>
-                  <strong id="detail-rate" class="num" style="font-size:2.1rem;">9,8 %</strong>
+                  <svg id="mapa-chile-ficha" class="chile-svg js-chile-map" data-map-compact="1" viewBox="0 0 180 776" role="group" aria-label="Mapa interactivo de Chile en la ficha de región" xmlns="http://www.w3.org/2000/svg" style="max-width:4.5rem; flex-shrink:0;"></svg>
                 </div>
 
                 <div class="grid-3">
@@ -3387,7 +3485,7 @@
 
                 <p id="detail-source-text" class="small-note" style="margin:0;"></p>
                 <div class="row-wrap">
-                  <a id="detail-source-link" class="btn btn-primary btn-sm" href="#" target="_blank" rel="noopener noreferrer">
+                  <a id="detail-source-link" class="btn btn-primary btn-sm" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-336.pdf" target="_blank" rel="noopener noreferrer">
                     Fuente oficial del INE (se abre en una pestaña nueva)
                   </a>
                   <a class="inline-link" href="https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/cuadros-estadisticos/series-vigentes/indicadores_principales_reg_sex.xlsx" target="_blank" rel="noopener noreferrer">
@@ -3414,18 +3512,27 @@
             <p id="comp-period-sub" class="small-note" style="margin:0;">Compara dos regiones entre sí y frente a la tasa nacional de junio-agosto 2026 (<strong>9,6 %</strong>).</p>
           </div>
 
-          <div class="grid-2">
-            <div class="field-group">
-              <label class="field-label" for="comp-region-a">Primera región</label>
-              <select id="comp-region-a" class="select-control"></select>
+          <div class="comp-map-layout">
+            <div class="map-card" style="padding: var(--espacio-2);">
+              <svg id="mapa-chile-comparador" class="chile-svg js-chile-map" data-map-mode="comparator" viewBox="0 0 180 776" role="group" aria-label="Mapa interactivo del comparador regional: toca una región para asignar A y luego B" xmlns="http://www.w3.org/2000/svg" style="max-height:400px;"></svg>
+              <p id="comp-map-status" class="small-note" style="margin:0; text-align:center; font-weight:700;" aria-live="polite">Siguiente toque: asigna A</p>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="comp-region-b">Segunda región</label>
-              <select id="comp-region-b" class="select-control"></select>
+
+            <div class="stack-4">
+              <div class="grid-2">
+                <div class="field-group">
+                  <label class="field-label" for="comp-region-a">Primera región (A)</label>
+                  <select id="comp-region-a" class="select-control"></select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="comp-region-b">Segunda región (B)</label>
+                  <select id="comp-region-b" class="select-control"></select>
+                </div>
+              </div>
+
+              <div class="grid-3" id="comparator-cards" aria-live="polite"></div>
             </div>
           </div>
-
-          <div class="grid-3" id="comparator-cards" aria-live="polite"></div>
 
           <div class="why-wrap">
             <button type="button" class="why-btn" aria-expanded="false" aria-controls="why-comp">¿Por qué comparar contra jun-ago 2026 y no jul-sep 2026?</button>
@@ -3540,7 +3647,7 @@
                     <div class="card-soft stack-2">
                       <span style="font-weight:800;">Zona 4 · Mapa a la izquierda y tabla de regiones a la derecha</span>
                       <div class="preview-region-grid tpl-mobile-z4">
-                        <span class="skel-box" style="min-height:7.5rem;"></span>
+                        <svg class="chile-svg is-placeholder-map" viewBox="0 0 180 776" role="img" aria-label="Espacio reservado para el mapa" xmlns="http://www.w3.org/2000/svg" style="max-width:4.5rem; margin:0 auto;"></svg>
                         <div class="stack-2">
                           <span class="skel-bar" style="width:90%;"></span>
                           <span class="skel-bar" style="width:85%;"></span>
@@ -3550,7 +3657,7 @@
                       <div class="tpl-desktop-z4">
                         <div class="card-soft stack-2" style="align-items:center;">
                           <span style="font-weight:700;">Mapa (izquierda)</span>
-                          <span class="skel-box" style="width:100%; min-height:15rem;"></span>
+                          <svg class="chile-svg is-placeholder-map" viewBox="0 0 180 776" role="img" aria-label="Espacio reservado para el mapa" xmlns="http://www.w3.org/2000/svg" style="max-width:7.5rem; margin:0 auto;"></svg>
                         </div>
                         <div class="card-soft stack-2">
                           <span style="font-weight:700;">Tabla de regiones (derecha)</span>
@@ -3631,11 +3738,11 @@
 
                   <div class="preview-main">
                     <div class="card stack-2" style="padding:var(--espacio-4);">
-                      <span id="preview-main-chip" class="chip chip-nacional preview-tag-pill" style="width:fit-content;">Nacional · jul-sep 2026 · Boletín 336</span>
+                      <span id="preview-main-chip" class="chip chip-nacional preview-tag-pill" tabindex="0" data-info="Alcance territorial y boletín oficial mostrado en la vista previa." style="width:fit-content;">Nacional · jul-sep 2026 · Boletín 336</span>
                       <p id="preview-main-title" style="font-weight:800; margin:0;">Desocupación nacional</p>
                       <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
                         <strong id="preview-main-rate" class="num preview-rate-big">9,8 %</strong>
-                        <span id="preview-main-var" class="var-badge var-up">↑ +0,2 puntos porcentuales</span>
+                        <span id="preview-main-var" class="var-badge var-up" tabindex="0" data-info="Variación de la tasa de desocupación expresada en puntos porcentuales.">↑ +0,2 puntos porcentuales</span>
                       </div>
                       <p id="preview-main-sub" class="small-note" style="margin:0;">Respecto al trimestre anterior (jun-ago 2026: 9,6 %). Variación anual: +1,3 puntos porcentuales.</p>
                     </div>
@@ -3661,7 +3768,7 @@
                         Las cifras regionales corresponden al boletín anterior (jun-ago 2026 · Boletín 335); se actualizarán con el boletín 336.
                       </p>
                       <div class="preview-region-grid">
-                        <svg class="chile-svg js-chile-mini" viewBox="0 0 180 776" aria-label="Mapa de Chile de vista previa" xmlns="http://www.w3.org/2000/svg"></svg>
+                        <svg id="mapa-chile-preview-mini" class="chile-svg js-chile-map" data-map-compact="1" viewBox="0 0 180 776" role="group" aria-label="Mini mapa interactivo de Chile en vista móvil y tablet" xmlns="http://www.w3.org/2000/svg"></svg>
                         <div class="stack-2" style="min-width:0;">
                           <label id="page-region-label" class="field-label" for="page-region-select">Región seleccionada (jun-ago 2026)</label>
                           <select id="page-region-select" class="select-control js-region-select"></select>
@@ -3684,7 +3791,7 @@
                           <svg id="mapa-chile-preview" class="chile-svg js-chile-map" viewBox="0 0 180 776" role="group" aria-label="Mapa interactivo de Chile por regiones en vista de escritorio" xmlns="http://www.w3.org/2000/svg"></svg>
                           <p class="small-note" style="margin:0; text-align:center;">Mapa esquemático, no a escala</p>
                           <div id="preview-map-selected-callout" class="selected-callout" aria-live="polite">
-                            Vista nacional · 9,8 % · jul-sep 2026
+                            Nacional · 9,8 % · jul-sep 2026 · Boletín 336
                           </div>
                         </div>
 
@@ -3765,8 +3872,8 @@
               <button type="button" class="btn btn-secondary btn-sm js-ui-state-btn" data-uistate="disabled" aria-pressed="false">Deshabilitado</button>
             </div>
             <div id="ui-state-preview" class="row-wrap card" style="padding:var(--espacio-4);">
-              <button type="button" id="preview-ui-btn" class="btn btn-primary">Ver mi región →</button>
-              <select id="preview-ui-select" class="select-control preview-ui-select" aria-label="Selector de muestra de estado">
+              <button type="button" id="preview-ui-btn" class="btn btn-primary" data-info="Botón de muestra para probar los estados visuales: normal, hover, activo, foco y deshabilitado.">Ver mi región →</button>
+              <select id="preview-ui-select" class="select-control preview-ui-select" aria-label="Selector de muestra de estado" data-info="Selector de muestra para probar estados visuales e interacción con teclado.">
                 <option>Metropolitana · 9,8 %</option>
               </select>
               <span id="preview-ui-note" class="small-note">Estado actual: normal.</span>
@@ -3833,83 +3940,30 @@
           </article>
         </div>
 
-        <div class="stack-4" style="margin-bottom: var(--espacio-5);">
-          <div class="agent-limits-grid">
-            <article class="agent-block agent-block-yes" aria-label="Componente: Lo que el agente sí hace">
-              <div class="agent-block-head">
-                <span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span>
-                <h3>Lo que el agente sí hace</h3>
-              </div>
-              <ul class="agent-list">
-                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Vigila al INE cada mañana.</span></li>
-                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Lee el boletín y extrae las cifras con su fuente.</span></li>
-                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Redacta el borrador de la nota del trimestre en lenguaje simple.</span></li>
-                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Deja una traza de todo lo que hizo.</span></li>
-                <li><span class="agent-icon agent-icon-yes" aria-hidden="true">✓</span><span>Una persona revisa y aprueba antes de publicar.</span></li>
-              </ul>
-            </article>
-
-            <article class="agent-block agent-block-no" aria-label="Componente: Límites, lo que no puede ni debe hacer">
-              <div class="agent-block-head">
-                <span class="reliability-icon" aria-hidden="true">!</span>
-                <h3>Límites: Lo que no puede ni debe hacer</h3>
-              </div>
-              <ul class="agent-list">
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Publicar sin que una persona apruebe.</span></li>
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Inventar una cifra o una causa.</span></li>
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Adjetivar ("alarmante", "histórico").</span></li>
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Dar datos por comuna o ciudad (la ENE no lo permite).</span></li>
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Hacer proyecciones o decir dónde conviene estudiar o trabajar.</span></li>
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Hacer rankings con datos poco fiables (Aysén y Magallanes).</span></li>
-                <li><span class="agent-icon agent-icon-no" aria-hidden="true">✕</span><span>Esconder que se usó IA.</span></li>
-              </ul>
-            </article>
-          </div>
-
-          <div class="card stack-3">
-            <h3>Documentación del componente: Alcance del agente y Límites</h3>
-            <div class="grid-2">
-              <div class="card-soft stack-2">
-                <h4 style="margin:0; font-size:1rem;">Variantes</h4>
-                <ul style="padding-left:1.2rem; margin:0;" class="stack-2">
-                  <li><strong>Variante Capacidad ("Lo que el agente sí hace"):</strong> fondo crema (<code>#F7F4D5</code>), borde petróleo de 2 px (<code>#105666</code>), texto verde oscuro (12,5:1) e ícono de check (<code>✓</code>) en cada línea.</li>
-                  <li><strong>Variante Límite ("Límites: Lo que no puede ni debe hacer"):</strong> fondo rosa (<code>#D3968C</code>), borde verde oscuro de 2 px (<code>#0A3323</code>), encabezado con ícono <code>!</code> + palabra "Límites", texto verde oscuro (5,6:1) e ícono <code>✕</code> en cada línea.</li>
-                </ul>
-              </div>
-              <div class="card-soft stack-2">
-                <h4 style="margin:0; font-size:1rem;">Estados</h4>
-                <ul style="padding-left:1.2rem; margin:0;" class="stack-2">
-                  <li><strong>Normal / visible:</strong> ambos bloques lado a lado en escritorio (<code>≥ 768 px</code>) y apilados en teléfono, creciendo verticalmente sin cortes.</li>
-                  <li><strong>Lectura accesible (sin dependencia del color):</strong> íconos explícitos (<code>✓</code>, <code>!</code> y <code>✕</code>) acompañan siempre al fondo crema o rosa.</li>
-                  <li><strong>En revisión / bloqueo preventivo:</strong> si falta aprobación humana o falla la conexión con el agente, rige el límite de no publicar y se muestran los datos incrustados verificados.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="table-wrap">
-              <table class="ds-table">
-                <caption>Reglas de uso del componente Agente y Límites (Úsalo para / No lo uses para)</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Bloque</th>
-                    <th scope="col">Úsalo para</th>
-                    <th scope="col">No lo uses para</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" data-label="Bloque">Lo que el agente sí hace</th>
-                    <td data-label="Úsalo para">Documentar tareas automatizadas con trazabilidad y revisión humana obligatoria.</td>
-                    <td data-label="No lo uses para">Mezclar prohibiciones dentro del mismo bloque ni omitir la aprobación humana.</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" data-label="Bloque">Límites (Lo que no puede ni debe hacer)</th>
-                    <td data-label="Úsalo para">Visibilizar restricciones editoriales, territoriales y estadísticas con fondo rosa, borde verde oscuro e íconos <code>!</code> y <code>✕</code>.</td>
-                    <td data-label="No lo uses para">Comunicar restricciones solo con color rosa sin texto ni ícono de advertencia.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="table-wrap" style="margin-top: var(--espacio-5);">
+          <table class="ds-table">
+            <caption>Mapa de interacciones</caption>
+            <thead>
+              <tr>
+                <th scope="col">Control</th>
+                <th scope="col">Dónde está</th>
+                <th scope="col">Qué hace</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row" data-label="Control">Botón Menú / Cerrar y lista de secciones</th><td data-label="Dónde está">Cabecera fija y panel lateral</td><td data-label="Qué hace">Abre o cierra la navegación, alterna entre "Ver todo" y "Ver una sección" y desplaza al bloque elegido.</td></tr>
+              <tr><th scope="row" data-label="Control">Modo oscuro y Probar GET /regiones</th><td data-label="Dónde está">Panel lateral (herramientas)</td><td data-label="Qué hace">Alterna tema claro/oscuro y consulta el endpoint en vivo con respaldo automático a datos incrustados.</td></tr>
+              <tr><th scope="row" data-label="Control">Ver mapa de Atomic Design y Ver mi región →</th><td data-label="Dónde está">Cabecera principal, Sec. 4, Sec. 5 y Sec. 8</td><td data-label="Qué hace">Desplaza al diagrama de cinco niveles o directamente al selector y mapa de regiones.</td></tr>
+              <tr><th scope="row" data-label="Control">Botones "¿Por qué?"</th><td data-label="Dónde está">Secciones 1, 2, 3, 4, 5, 6 y 7</td><td data-label="Qué hace">Despliega u oculta la justificación de diseño vinculada a Amaya y a los principios (cierra con Escape).</td></tr>
+              <tr><th scope="row" data-label="Control">Tarjetas de tokens</th><td data-label="Dónde está">Sección 3 · Tokens y contraste</td><td data-label="Qué hace">Copia el valor del token al portapapeles y anuncia la confirmación por pantalla y lector.</td></tr>
+              <tr><th scope="row" data-label="Control">Chips, leyendas, íconos y variación</th><td data-label="Dónde está">Secciones 4, 5, 6, 7, 8 y 9</td><td data-label="Qué hace">Muestra un globo informativo accesible (role="tooltip") al tocar o enfocar con teclado; cierra con Escape o al tocar fuera.</td></tr>
+              <tr><th scope="row" data-label="Control">Mapas interactivos de Chile (9 instancias)</th><td data-label="Dónde está">Sec. 4 (Organismos y Páginas), Átomos, Moléculas, Sec. 7 (Organismos, Ficha y Comparador) y Sec. 8 (390/768/1200 px en Página)</td><td data-label="Qué hace">Permite elegir región con clic, toque o Enter/Espacio, muestra tooltip con período y sincroniza tarjetas, tabla y selector; en el comparador asigna A y luego B.</td></tr>
+              <tr><th scope="row" data-label="Control">Tabla regional, botones de orden y selectores</th><td data-label="Dónde está">Sección 4, Sección 5, Sección 7 y Sección 8</td><td data-label="Qué hace">Ordena por región o tasa y sincroniza la selección regional o la comparación A/B sin mezclar trimestres.</td></tr>
+              <tr><th scope="row" data-label="Control">Enlaces "Fuente oficial del INE" / Boletín 335 y 336</th><td data-label="Dónde está">Secciones 4, 5, 6, 7, 8 y pie de página</td><td data-label="Qué hace">Abre el boletín PDF oficial del INE (nacional 335/336 o regional) o la serie Excel en una pestaña nueva.</td></tr>
+              <tr><th scope="row" data-label="Control">Conmutadores de modo y dispositivo</th><td data-label="Dónde está">Sección 8 · Plantillas y páginas</td><td data-label="Qué hace">Alterna entre "Plantilla vacía (esqueleto)" y "Página con datos reales" en 390 px, 768 px y 1200 px, más el menú interno del mockup.</td></tr>
+              <tr><th scope="row" data-label="Control">Simulador de estados de datos y de componente</th><td data-label="Dónde está">Sección 9 · Estados, datos y voz</td><td data-label="Qué hace">Previsualiza estados Normal, Cargando, Sin datos, Error y No consta, y los estados hover, activo, foco y deshabilitado.</td></tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -3928,6 +3982,9 @@
       </footer>
     </main>
   </div>
+
+  <div id="ui-info-popover" class="ui-info-popover" role="tooltip" hidden></div>
+  <div id="map-floating-tooltip" class="map-floating-tooltip" role="tooltip" hidden></div>
 
   <script>
     (function () {
@@ -3980,7 +4037,8 @@
         ocupacion: 55.5,
         participacion: 61.6,
         informalidad: 26.4,
-        fuente: 'INE, Boletín ENE n.º 336 (jul-sep 2026)'
+        fuente: 'INE, Boletín ENE n.º 336 (jul-sep 2026)',
+        url: 'https://www.ine.gob.cl/docs/default-source/ocupacion-y-desocupacion/boletines/2026/nacional/ene-nacional-336.pdf'
       };
 
       const MAP_PATHS = [
@@ -4049,7 +4107,8 @@
           prev_period: getPeriodShort(),
           prev_boletin: dataset.boletin !== undefined && dataset.boletin !== null ? dataset.boletin : DATOS_INCRUSTADOS.boletin,
           fuente: DATOS_NACIONALES_336.fuente,
-          url: nat335.url || DATOS_INCRUSTADOS.nacional.url
+          url: DATOS_NACIONALES_336.url,
+          prev_url: nat335.url || DATOS_INCRUSTADOS.nacional.url
         };
       }
 
@@ -4150,43 +4209,217 @@
         if (el) el.textContent = msg;
       }
 
-      function buildSvgMap(svgEl, interactive) {
+      let compNextSlot = 'A';
+
+      function positionFloatingBox(box, anchorEl) {
+        if (!box || !anchorEl) return;
+        const r = anchorEl.getBoundingClientRect();
+        const margin = 8;
+        box.style.left = '8px';
+        box.style.top = '8px';
+        const bw = box.offsetWidth || 240;
+        const bh = box.offsetHeight || 40;
+        let left = r.left + r.width / 2 - bw / 2;
+        left = Math.max(margin, Math.min(left, window.innerWidth - bw - margin));
+        let top = r.top - bh - 8;
+        if (top < 62) {
+          top = r.bottom + 8;
+        }
+        if (top + bh > window.innerHeight - margin) {
+          top = Math.max(62, window.innerHeight - bh - margin);
+        }
+        box.style.left = Math.round(left) + 'px';
+        box.style.top = Math.round(top) + 'px';
+      }
+
+      function showTooltip(text, anchorEl) {
+        const tt = document.getElementById('map-tooltip');
+        if (tt && anchorEl && anchorEl.closest('#sec-7')) {
+          tt.textContent = text;
+          tt.hidden = false;
+        }
+        const ftt = document.getElementById('map-floating-tooltip');
+        if (ftt && anchorEl) {
+          ftt.textContent = text;
+          ftt.hidden = false;
+          positionFloatingBox(ftt, anchorEl);
+        }
+      }
+
+      function hideTooltip() {
+        const tt = document.getElementById('map-tooltip');
+        if (tt) tt.hidden = true;
+        const ftt = document.getElementById('map-floating-tooltip');
+        if (ftt) ftt.hidden = true;
+      }
+
+      let activePopoverTrigger = null;
+
+      function hideInfoPopover() {
+        const pop = document.getElementById('ui-info-popover');
+        if (pop) pop.hidden = true;
+        if (activePopoverTrigger) {
+          activePopoverTrigger.removeAttribute('aria-describedby');
+          activePopoverTrigger = null;
+        }
+      }
+
+      function showInfoPopover(trigger) {
+        const pop = document.getElementById('ui-info-popover');
+        if (!pop || !trigger) return;
+        const msg = trigger.getAttribute('data-info');
+        if (!msg) return;
+        if (activePopoverTrigger && activePopoverTrigger !== trigger) {
+          activePopoverTrigger.removeAttribute('aria-describedby');
+        }
+        activePopoverTrigger = trigger;
+        trigger.setAttribute('aria-describedby', 'ui-info-popover');
+        pop.textContent = msg;
+        pop.hidden = false;
+        positionFloatingBox(pop, trigger);
+      }
+
+      let lastFocusOpenedEl = null;
+      let lastFocusOpenedAt = 0;
+
+      function bindInfoTriggers(root) {
+        const scope = root || document;
+        scope.querySelectorAll('[data-info]').forEach(function (el) {
+          if (el.dataset.infoBound === '1') return;
+          el.dataset.infoBound = '1';
+
+          el.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            const justFocused = lastFocusOpenedEl === el && (Date.now() - lastFocusOpenedAt) < 350;
+            if (justFocused) {
+              showInfoPopover(el);
+              return;
+            }
+            if (activePopoverTrigger === el && !document.getElementById('ui-info-popover').hidden) {
+              hideInfoPopover();
+            } else {
+              showInfoPopover(el);
+            }
+          });
+          el.addEventListener('focus', function () {
+            lastFocusOpenedEl = el;
+            lastFocusOpenedAt = Date.now();
+            showInfoPopover(el);
+          });
+          el.addEventListener('blur', function () {
+            setTimeout(function () {
+              if (activePopoverTrigger === el && document.activeElement !== el) {
+                hideInfoPopover();
+              }
+            }, 60);
+          });
+          el.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') {
+              if (el.tagName !== 'BUTTON' && el.tagName !== 'A' && el.tagName !== 'SELECT') {
+                ev.preventDefault();
+                showInfoPopover(el);
+              }
+            } else if (ev.key === 'Escape') {
+              hideInfoPopover();
+            }
+          });
+        });
+      }
+
+      function renderPlaceholderMap(svgEl) {
         const ns = 'http://www.w3.org/2000/svg';
+        svgEl.innerHTML = '';
+        MAP_PATHS.forEach(function (mp) {
+          const path = document.createElementNS(ns, 'path');
+          path.setAttribute('class', 'region');
+          path.setAttribute('d', mp.d);
+          path.setAttribute('aria-hidden', 'true');
+          svgEl.appendChild(path);
+        });
+      }
+
+      function assignComparatorRegion(codigo) {
+        const compA = document.getElementById('comp-region-a');
+        const compB = document.getElementById('comp-region-b');
+        if (!compA || !compB) return;
+        const slot = compNextSlot;
+        if (slot === 'A') {
+          compA.value = codigo;
+          compNextSlot = 'B';
+        } else {
+          compB.value = codigo;
+          compNextSlot = 'A';
+        }
+        const statusEl = document.getElementById('comp-map-status');
+        if (statusEl) {
+          statusEl.textContent = 'Siguiente toque: asigna ' + compNextSlot;
+        }
+        renderComparator();
+        const reg = findRegion(codigo);
+        if (reg) {
+          announce('Región ' + slot + ' del comparador: ' + reg.region + ', ' + formatPct(reg.tasa, reg.codigo));
+        }
+      }
+
+      /* Único componente reutilizable de mapa para las 9 apariciones interactivas */
+      function renderChileMap(svgEl) {
+        const ns = 'http://www.w3.org/2000/svg';
+        const mode = svgEl.dataset.mapMode === 'comparator' ? 'comparator' : 'shared';
+        const compAEl = mode === 'comparator' ? document.getElementById('comp-region-a') : null;
+        const compBEl = mode === 'comparator' ? document.getElementById('comp-region-b') : null;
+        const compAVal = compAEl ? (compAEl.value || 'RM') : '';
+        const compBVal = compBEl ? (compBEl.value || 'VS') : '';
+
         svgEl.innerHTML = '';
 
         const defs = document.createElementNS(ns, 'defs');
-        const pat = document.createElementNS(ns, 'pattern');
-        const patId = (svgEl.id || 'mini') + '-patron-fiabilidad-' + Math.random().toString(36).slice(2, 6);
-        pat.setAttribute('id', patId);
-        pat.setAttribute('width', '8');
-        pat.setAttribute('height', '8');
-        pat.setAttribute('patternUnits', 'userSpaceOnUse');
-        pat.setAttribute('patternTransform', 'rotate(45)');
+        const uid = (svgEl.id || 'mapa') + '-' + Math.random().toString(36).slice(2, 6);
 
-        const bgRect = document.createElementNS(ns, 'rect');
-        bgRect.setAttribute('width', '8');
-        bgRect.setAttribute('height', '8');
-        bgRect.setAttribute('fill', '#EFEBD0');
-        pat.appendChild(bgRect);
+        function makeStripePattern(id, bgColor, stripeColor, opacity) {
+          const pat = document.createElementNS(ns, 'pattern');
+          pat.setAttribute('id', id);
+          pat.setAttribute('width', '8');
+          pat.setAttribute('height', '8');
+          pat.setAttribute('patternUnits', 'userSpaceOnUse');
+          pat.setAttribute('patternTransform', 'rotate(45)');
+          const bgRect = document.createElementNS(ns, 'rect');
+          bgRect.setAttribute('width', '8');
+          bgRect.setAttribute('height', '8');
+          bgRect.setAttribute('fill', bgColor);
+          pat.appendChild(bgRect);
+          const stripe = document.createElementNS(ns, 'line');
+          stripe.setAttribute('x1', '0');
+          stripe.setAttribute('y1', '0');
+          stripe.setAttribute('x2', '0');
+          stripe.setAttribute('y2', '8');
+          stripe.setAttribute('stroke', stripeColor);
+          stripe.setAttribute('stroke-width', '2');
+          stripe.setAttribute('stroke-opacity', String(opacity));
+          pat.appendChild(stripe);
+          return pat;
+        }
 
-        const stripe = document.createElementNS(ns, 'line');
-        stripe.setAttribute('x1', '0');
-        stripe.setAttribute('y1', '0');
-        stripe.setAttribute('x2', '0');
-        stripe.setAttribute('y2', '8');
-        stripe.setAttribute('stroke', '#105666');
-        stripe.setAttribute('stroke-width', '2');
-        stripe.setAttribute('stroke-opacity', '0.32');
-        pat.appendChild(stripe);
-
-        defs.appendChild(pat);
+        const patNormalId = uid + '-pat-normal';
+        const patSelectedId = uid + '-pat-sel';
+        defs.appendChild(makeStripePattern(patNormalId, '#EFEBD0', '#105666', 0.34));
+        defs.appendChild(makeStripePattern(patSelectedId, '#D3968C', '#0A3323', 0.36));
         svgEl.appendChild(defs);
 
         MAP_PATHS.forEach(function (mp) {
           const reg = findRegion(mp.codigo) || dataset.regiones[0];
           const isRelLimited = Boolean(getReliability(mp.codigo));
           const colors = getScaleColors(reg.tasa);
-          const isSelected = Boolean(regionSeleccionada && mp.codigo === regionSeleccionada);
+
+          let isSelected = false;
+          let slotTag = '';
+          if (mode === 'comparator') {
+            const isA = mp.codigo === compAVal;
+            const isB = mp.codigo === compBVal;
+            isSelected = isA || isB;
+            slotTag = isA && isB ? 'A/B' : (isA ? 'A' : (isB ? 'B' : ''));
+          } else {
+            isSelected = Boolean(regionSeleccionada && mp.codigo === regionSeleccionada);
+          }
 
           const path = document.createElementNS(ns, 'path');
           path.setAttribute('class', 'region' + (isSelected ? ' is-selected' : ''));
@@ -4197,68 +4430,67 @@
           path.setAttribute('data-romano', mp.romano);
           path.setAttribute('data-nombre', mp.nombre);
           path.setAttribute('d', mp.d);
+          path.setAttribute('tabindex', '0');
+          path.setAttribute('role', 'button');
+          path.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+          path.setAttribute(
+            'aria-label',
+            mp.nombre + ', desocupación ' + formatPct(reg.tasa, mp.codigo) + ', ' + getPeriodShort() + (slotTag ? ', asignada a ' + slotTag : '')
+          );
 
-          if (interactive) {
-            path.setAttribute('tabindex', '0');
-            path.setAttribute('role', 'button');
-            path.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-            path.setAttribute('aria-label', mp.nombre + ', desocupación ' + formatPct(reg.tasa, mp.codigo) + ', ' + getPeriodShort());
-          } else {
-            path.setAttribute('aria-hidden', 'true');
-          }
-
-          if (isSelected) {
+          if (isSelected && isRelLimited) {
+            path.style.setProperty('--fill', 'url(#' + patSelectedId + ')');
+          } else if (isSelected) {
             path.style.setProperty('--fill', '#D3968C');
           } else if (isRelLimited) {
-            path.style.setProperty('--fill', 'url(#' + patId + ')');
+            path.style.setProperty('--fill', 'url(#' + patNormalId + ')');
           } else {
             path.style.setProperty('--fill', colors.fill);
           }
 
-          if (interactive) {
-            path.addEventListener('click', function () { seleccionarRegion(mp.codigo, true, true); });
-            path.addEventListener('keydown', function (ev) {
-              if (ev.key === 'Enter' || ev.key === ' ') {
-                ev.preventDefault();
-                seleccionarRegion(mp.codigo, true, true);
-              }
-            });
-            path.addEventListener('mouseenter', function () { showTooltip(mp.nombre + ' · ' + formatPct(reg.tasa, mp.codigo) + ' · ' + getPeriodShort()); });
-            path.addEventListener('focus', function () { showTooltip(mp.nombre + ' · ' + formatPct(reg.tasa, mp.codigo) + ' · ' + getPeriodShort()); });
-            path.addEventListener('mouseleave', hideTooltip);
-            path.addEventListener('blur', hideTooltip);
+          function activateRegion() {
+            if (mode === 'comparator') {
+              assignComparatorRegion(mp.codigo);
+            } else {
+              seleccionarRegion(mp.codigo, true, true);
+            }
           }
+
+          const ttText = mp.nombre + ' · ' + formatPct(reg.tasa, mp.codigo) + ' · ' + getPeriodShort() + (slotTag ? ' (' + slotTag + ')' : '');
+
+          path.addEventListener('click', activateRegion);
+          path.addEventListener('keydown', function (ev) {
+            if (ev.key === 'Enter' || ev.key === ' ') {
+              ev.preventDefault();
+              activateRegion();
+            } else if (ev.key === 'Escape') {
+              hideTooltip();
+            }
+          });
+          path.addEventListener('mouseenter', function () { showTooltip(ttText, path); });
+          path.addEventListener('focus', function () { showTooltip(ttText, path); });
+          path.addEventListener('mouseleave', hideTooltip);
+          path.addEventListener('blur', hideTooltip);
 
           svgEl.appendChild(path);
 
-          if (interactive) {
-            const label = document.createElementNS(ns, 'text');
-            label.setAttribute('class', 'reg-label');
-            label.setAttribute('x', String(mp.cx));
-            label.setAttribute('y', String(mp.cy));
-            label.setAttribute('fill', isSelected || isRelLimited ? '#0A3323' : colors.text);
+          const label = document.createElementNS(ns, 'text');
+          label.setAttribute('class', slotTag ? 'reg-slot-badge' : 'reg-label');
+          label.setAttribute('x', String(mp.cx));
+          label.setAttribute('y', String(mp.cy));
+          label.setAttribute('fill', isSelected || isRelLimited ? '#0A3323' : colors.text);
+          if (slotTag) {
+            label.textContent = slotTag + (isRelLimited ? '*' : '');
+          } else {
             label.textContent = mp.romano + (isRelLimited ? '*' : '');
-            svgEl.appendChild(label);
           }
+          svgEl.appendChild(label);
         });
       }
 
-      function showTooltip(text) {
-        const tt = document.getElementById('map-tooltip');
-        if (!tt) return;
-        tt.textContent = text;
-        tt.hidden = false;
-      }
-
-      function hideTooltip() {
-        const tt = document.getElementById('map-tooltip');
-        if (!tt) return;
-        tt.hidden = true;
-      }
-
       function refreshAllMaps() {
-        document.querySelectorAll('.js-chile-map').forEach(function (svg) { buildSvgMap(svg, true); });
-        document.querySelectorAll('.js-chile-mini').forEach(function (svg) { buildSvgMap(svg, false); });
+        document.querySelectorAll('.js-chile-map').forEach(function (svg) { renderChileMap(svg); });
+        document.querySelectorAll('.is-placeholder-map').forEach(function (svg) { renderPlaceholderMap(svg); });
       }
 
       function getSortedRegions() {
@@ -4413,7 +4645,7 @@
             const nat = getNationalRef();
             const optNat = document.createElement('option');
             optNat.value = '';
-            optNat.textContent = 'Nacional · ' + nat.trimestre_corto + ' (' + formatPct(nat.tasa) + ')';
+            optNat.textContent = 'Nacional · ' + nat.trimestre_corto + ' · Boletín ' + nat.boletin + ' (' + formatPct(nat.tasa) + ')';
             sel.appendChild(optNat);
           }
 
@@ -4503,7 +4735,7 @@
 
           const s4Link = document.getElementById('s4-pag-source-link');
           if (s4Link) {
-            s4Link.href = nat.url || '#';
+            s4Link.href = nat.url;
             s4Link.textContent = 'INE · Boletín ' + nat.boletin + ' · ' + nat.trimestre_corto;
           }
 
@@ -4531,12 +4763,12 @@
             prevRelBox.classList.remove('is-alert');
             prevRelTxt.textContent = '* Aysén (' + aiStrPrev + '): dato no fiable y Magallanes (' + maStrPrev + '): dato poco fiable. Dato con limitaciones de fiabilidad según el INE; no usar para establecer rankings.';
           }
-          setText('preview-map-selected-callout', 'Vista nacional · ' + formatPct(nat.tasa) + ' · ' + nat.trimestre_corto);
+          setText('preview-map-selected-callout', 'Nacional · ' + formatPct(nat.tasa) + ' · ' + nat.trimestre_corto + ' · Boletín ' + nat.boletin);
 
           setText('preview-footer-period', 'INE · Boletín ' + nat.boletin + ' (' + nat.trimestre_corto + ') y Boletín ' + nat.prev_boletin + ' (' + nat.prev_period + ').');
           const pFootLink = document.getElementById('preview-footer-link');
           if (pFootLink) {
-            pFootLink.href = nat.url || '#';
+            pFootLink.href = nat.prev_url;
             const spanTxt = pFootLink.querySelector('.preview-nav-text');
             if (spanTxt) spanTxt.textContent = 'Boletín nacional 335 del INE (se abre en una pestaña nueva)';
           }
@@ -4597,7 +4829,7 @@
 
         const s4Link = document.getElementById('s4-pag-source-link');
         if (s4Link) {
-          s4Link.href = reg.url || nat.url || '#';
+          s4Link.href = reg.url || nat.url;
           s4Link.textContent = 'INE · ' + reg.region + ' (' + perShort + ')';
         }
 
@@ -4636,7 +4868,7 @@
         setText('preview-footer-period', reg.fuente || ('INE · ' + reg.region + ' · ' + perLabel));
         const pFootLink = document.getElementById('preview-footer-link');
         if (pFootLink) {
-          pFootLink.href = reg.url || nat.url || '#';
+          pFootLink.href = reg.url || nat.url;
           const spanTxt = pFootLink.querySelector('.preview-nav-text');
           if (spanTxt) spanTxt.textContent = 'Fuente INE: ' + reg.region + ' (se abre en una pestaña nueva)';
         }
@@ -4658,9 +4890,9 @@
           }
           setText('mol-region-source', nat.fuente);
           const molUrl = document.getElementById('mol-region-url');
-          if (molUrl) molUrl.href = nat.url || '#';
+          if (molUrl) molUrl.href = nat.url;
 
-          setText('map-selected-callout', 'Vista nacional · ' + formatPct(nat.tasa) + ' · ' + nat.trimestre_corto);
+          setText('map-selected-callout', 'Nacional · ' + formatPct(nat.tasa) + ' · ' + nat.trimestre_corto + ' · Boletín ' + nat.boletin);
           setText('detail-period-chip', nat.trimestre_corto + ' · Boletín ' + nat.boletin);
           setText('detail-title', 'Chile (vista nacional)');
           setText('detail-rate', formatPct(nat.tasa));
@@ -4673,7 +4905,7 @@
           if (relBox) relBox.hidden = true;
           setText('detail-source-text', nat.fuente);
           const detLink = document.getElementById('detail-source-link');
-          if (detLink) detLink.href = nat.url || '#';
+          if (detLink) detLink.href = nat.url;
 
           setText('page-region-summary', 'Vista nacional (' + formatPct(nat.tasa) + ', ' + nat.trimestre_corto + '). Elige una región.');
           return;
@@ -4695,7 +4927,7 @@
         }
         setText('mol-region-source', reg.fuente || '');
         const molUrl = document.getElementById('mol-region-url');
-        if (molUrl) molUrl.href = reg.url || '#';
+        if (molUrl) molUrl.href = reg.url || nat.url;
 
         setText('map-selected-callout', reg.region + ' · ' + rateStr + ' · ' + getPeriodShort());
         setText('detail-period-chip', getPeriodLabel());
@@ -4725,7 +4957,7 @@
 
         setText('detail-source-text', reg.fuente || '');
         const detLink = document.getElementById('detail-source-link');
-        if (detLink) detLink.href = reg.url || '#';
+        if (detLink) detLink.href = reg.url || nat.url;
 
         setText('page-region-summary', reg.region + ': ' + rateStr + ' (' + getPeriodLabel() + ').');
       }
@@ -4773,13 +5005,15 @@
         const regB = findRegion(compB.value) || dataset.regiones[1];
         const nat = dataset.nacional;
 
-        function buildCard(title, sub, rateText, diffText, relText, linkUrl) {
+        function buildCard(slotBadge, title, sub, rateText, diffText, relText, linkUrl) {
           const article = document.createElement('article');
           article.className = 'card-soft stack-2';
 
           const chip = document.createElement('span');
           chip.className = 'chip chip-ine';
-          chip.textContent = sub;
+          chip.setAttribute('tabindex', '0');
+          chip.setAttribute('data-info', 'Período y boletín oficial de esta tarjeta comparativa.');
+          chip.textContent = (slotBadge ? slotBadge + ' · ' : '') + sub;
           article.appendChild(chip);
 
           const h = document.createElement('h4');
@@ -4806,6 +5040,8 @@
           if (relText) {
             const rel = document.createElement('p');
             rel.className = 'chip chip-alerta';
+            rel.setAttribute('tabindex', '0');
+            rel.setAttribute('data-info', 'Advertencia INE: muestra regional limitada; no usar para rankings.');
             rel.style.margin = '0';
             rel.textContent = relText;
             article.appendChild(rel);
@@ -4829,31 +5065,38 @@
         const relB = getReliability(regB.codigo) ? 'Dato ' + getReliability(regB.codigo) + ' (no usar en rankings)' : '';
 
         wrap.appendChild(buildCard(
+          'Región A',
           regA.region,
           getPeriodLabel(),
           formatPct(regA.tasa, regA.codigo),
           (diffA >= 0 ? '+' : '') + diffA.toFixed(1).replace('.', ',') + ' puntos porcentuales vs. país (' + getPeriodShort().split(' ')[0] + ')',
           relA,
-          regA.url || '#'
+          regA.url || (nat && nat.url) || DATOS_INCRUSTADOS.nacional.url
         ));
 
         wrap.appendChild(buildCard(
+          '',
           'Chile (referencia mismo trimestre)',
           getPeriodLabel(),
           nat.tasa.toFixed(1).replace('.', ',') + ' %',
           'Variación anual: ' + formatPP(nat.variacion_pp),
           '',
-          nat.url || '#'
+          (nat && nat.url) || DATOS_INCRUSTADOS.nacional.url
         ));
 
         wrap.appendChild(buildCard(
+          'Región B',
           regB.region,
           getPeriodLabel(),
           formatPct(regB.tasa, regB.codigo),
           (diffB >= 0 ? '+' : '') + diffB.toFixed(1).replace('.', ',') + ' puntos porcentuales vs. país (' + getPeriodShort().split(' ')[0] + ')',
           relB,
-          regB.url || '#'
+          regB.url || (nat && nat.url) || DATOS_INCRUSTADOS.nacional.url
         ));
+
+        const compSvg = document.getElementById('mapa-chile-comparador');
+        if (compSvg) renderChileMap(compSvg);
+        bindInfoTriggers(wrap);
       }
 
       function renderDataStateSandbox(state) {
@@ -4908,10 +5151,11 @@
         } else if (currentDataState === 'noconsta') {
           box.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">' +
             '<div><strong>Indicador desagregado</strong> · <span class="small-note">' + getPeriodLabel() + '</span></div>' +
-            '<span class="chip chip-alerta">No consta</span>' +
+            '<span class="chip chip-alerta" tabindex="0" data-info="Campo omitido por el INE en ese boletín; no se estima ni promedia.">No consta</span>' +
             '</div>' +
             '<p class="small-note" style="margin:0;">Cuando un boletín no publica un campo específico, se rotula literalmente "No consta" y no se rellena ni se promedia.</p>';
         }
+        bindInfoTriggers(box);
       }
 
       /* ========================================================================
@@ -5240,7 +5484,13 @@
           a.addEventListener('click', function (ev) {
             const href = a.getAttribute('href') || '';
             const targetId = href.startsWith('#') ? href.slice(1) : '';
-            if (viewMode === 'single' && targetId) {
+            const simDrawer = document.getElementById('sim-menu-drawer');
+            const simMenuBtn = document.getElementById('sim-menu-btn');
+            if (simDrawer && simMenuBtn && previewViewport === 'mobile') {
+              simDrawer.hidden = true;
+              simMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+            if (targetId) {
               ev.preventDefault();
               applySectionVisibility(targetId, true);
             }
@@ -5577,7 +5827,7 @@
         }
 
         /* Detección de superposiciones sobre los mapas de Chile */
-        const mapSvgs = Array.from(document.querySelectorAll('.js-chile-map, .js-chile-mini')).filter(isElementVisible);
+        const mapSvgs = Array.from(document.querySelectorAll('.js-chile-map')).filter(isElementVisible);
         mapSvgs.forEach(function (svg) {
           const mapRect = svg.getBoundingClientRect();
           all.forEach(function (el) {
@@ -5646,13 +5896,30 @@
       updatePeriodLabels();
       initWhyButtons();
       initCopyTokens();
+      bindInfoTriggers(document);
       initNavigationAndScrollSpy();
       initControls();
       updatePreviewModeUI();
       verificarDesbordamiento();
 
+      document.addEventListener('click', function (ev) {
+        const pop = document.getElementById('ui-info-popover');
+        if (pop && !pop.hidden && activePopoverTrigger && !activePopoverTrigger.contains(ev.target) && !pop.contains(ev.target)) {
+          hideInfoPopover();
+        }
+      });
+
+      document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape') {
+          hideInfoPopover();
+          hideTooltip();
+        }
+      });
+
       let resizeTimer = null;
       window.addEventListener('resize', function () {
+        hideInfoPopover();
+        hideTooltip();
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function () {
           updatePreviewModeUI();
